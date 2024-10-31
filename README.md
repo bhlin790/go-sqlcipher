@@ -7,9 +7,9 @@
 Self-contained Go sqlite3 driver with an AES-256 encrypted sqlite3 database
 conforming to the built-in database/sql interface. It is based on:
 
-- Go sqlite3 driver: https://github.com/mattn/go-sqlite3
-- SQLite extension with AES-256 codec: https://github.com/sqlcipher/sqlcipher
-- AES-256 implementation from: https://github.com/libtom/libtomcrypt
+- Go sqlite3 driver: https://github.com/mattn/go-sqlite3 (master)
+- SQLite extension with AES-256 codec: https://github.com/sqlcipher/sqlcipher (4.6.1)
+- AES-256 implementation from: https://github.com/libtom/libtomcrypt (develop)
 
 SQLite itself is part of SQLCipher.
 
@@ -27,13 +27,13 @@ See [migrating databases](https://www.zetetic.net/sqlcipher/sqlcipher-api/#Migra
 
 To upgrade your Go code to the 4.x series, change the import path to
 
-    "github.com/mutecomm/go-sqlcipher/v4"
+    "github.com/labulakalia/go-sqlcipher"
 
 ### Installation
 
 This package can be installed with the go get command:
 
-    go get github.com/mutecomm/go-sqlcipher
+    go get github.com/labulakalia/go-sqlcipher
 
 
 ### Documentation

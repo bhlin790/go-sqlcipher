@@ -1,6 +1,6 @@
 module github.com/labulakalia/go-sqlcipher
 
-go 1.23.1
+go 1.20
 
 require github.com/stretchr/testify v1.3.0
 

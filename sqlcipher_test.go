@@ -42,6 +42,7 @@ func init() {
 	if err != nil {
 		panic(err)
 	}
+	fmt.Println(dbnameWithDSN)
 	_, err = db.Exec(tables)
 	if err != nil {
 		panic(err)
