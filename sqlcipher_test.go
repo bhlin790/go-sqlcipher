@@ -99,6 +99,23 @@ func TestSQLCipherParallelSelect(t *testing.T) {
 	}
 }
 
+
+func TestSQLCipherVersion(t *testing.T) {
+	tmpdir, err := ioutil.TempDir("", testDir)
+	require.NoError(t, err)
+	defer os.RemoveAll(tmpdir)
+	dbname := filepath.Join(tmpdir, "unencrypted.sqlite")
+	db, err := sql.Open("sqlite3", dbname)
+	require.NoError(t, err)
+	defer db.Close()
+	_, err = db.Exec(tables)
+	require.NoError(t, err)
+	encrypted, err := sqlite3.IsEncrypted(dbname)
+	if assert.NoError(t, err) {
+		assert.False(t, encrypted)
+	}
+}
+
 func TestSQLCipherIsEncryptedFalse(t *testing.T) {
 	tmpdir, err := ioutil.TempDir("", testDir)
 	require.NoError(t, err)
