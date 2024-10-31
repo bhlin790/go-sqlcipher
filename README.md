@@ -42,21 +42,21 @@ To create and open encrypted database files use the following DSN parameters:
 
 ```go
 key := "2DD29CA851E7B56E4697B0E1F08507293D761A05CE4D1B628663F411A8086D99"
-dbname := fmt.Sprintf("db?_pragma_key=x'%s'&_pragma_cipher_page_size=4096", key)
+dbname := fmt.Sprintf("db?_key=x'%s'&_pragma_cipher_page_size=4096", key)
 db, _ := sql.Open("sqlite3", dbname)
 ```
 
-`_pragma_key` is the hex encoded 32 byte key (must be 64 characters long).
+`_key` is the hex encoded 32 byte key (must be 64 characters long).
 `_pragma_cipher_page_size` is the page size of the encrypted database (set if
 you want a different value than the default size).
 
 ```go
 key := url.QueryEscape("secret")
-dbname := fmt.Sprintf("db?_pragma_key=%s&_pragma_cipher_page_size=4096", key)
+dbname := fmt.Sprintf("db?_key=%s&_pragma_cipher_page_size=4096", key)
 db, _ := sql.Open("sqlite3", dbname)
 ```
 
-This uses a passphrase directly as `_pragma_key` with the key derivation function in
+This uses a passphrase directly as `_key` with the key derivation function in
 SQLCipher. Do not forget the `url.QueryEscape()` call in your code!
 
 See also [PRAGMA key](https://www.zetetic.net/sqlcipher/sqlcipher-api/#PRAGMA_key).
