@@ -3,41 +3,41 @@ name: Go
 on: [push, pull_request]
 
 jobs:
-  # test:
-    # name: Test
-    # runs-on: ${{ matrix.os }}
-    # defaults:
-    #   run:
-    #     shell: bash
-    # strategy:
-    #   matrix:
-    #     os: [ubuntu-latest, macos-latest]
-    #     go: ['1.22', '1.23']
-    #   fail-fast: false
-    # env:
-    #   OS: ${{ matrix.os }}
-    #   GO: ${{ matrix.go }}
-    # steps:
-    #   - uses: actions/setup-go@v5
-    #     with:
-    #       go-version: ${{ matrix.go }}
-    #   - if: startsWith(matrix.os, 'macos')
-    #     run: brew update
-    #   - name: Get Build Tools
-    #     run: |
-    #       go install github.com/ory/go-acc@latest
-    #   - name: Add $GOPATH/bin to $PATH
-    #     run: |
-    #       echo "$(go env GOPATH)/bin" >> "$GITHUB_PATH"
-    #   - uses: actions/checkout@v4
-    #   - name: Test
-    #     run: |
-    #       go-acc . -- -race -v -tags "sqlite_allow_uri_authority sqlite_app_armor sqlite_column_metadata sqlite_foreign_keys sqlite_fts5 sqlite_introspect sqlite_json sqlite_math_functions sqlite_os_trace sqlite_preupdate_hook sqlite_secure_delete sqlite_see sqlite_stat4 sqlite_trace sqlite_unlock_notify sqlite_vacuum_incr sqlite_vtable"
-    #   - name: Upload coverage to Codecov
-    #     uses: codecov/codecov-action@v4
-    #     with:
-    #       env_vars: OS,GO
-    #       file: coverage.txt
+  test:
+    name: Test
+    runs-on: ${{ matrix.os }}
+    defaults:
+      run:
+        shell: bash
+    strategy:
+      matrix:
+        os: [ubuntu-latest, macos-latest]
+        go: ['1.22', '1.23']
+      fail-fast: false
+    env:
+      OS: ${{ matrix.os }}
+      GO: ${{ matrix.go }}
+    steps:
+      - uses: actions/setup-go@v5
+        with:
+          go-version: ${{ matrix.go }}
+      - if: startsWith(matrix.os, 'macos')
+        run: brew update
+      - name: Get Build Tools
+        run: |
+          go install github.com/ory/go-acc@latest
+      - name: Add $GOPATH/bin to $PATH
+        run: |
+          echo "$(go env GOPATH)/bin" >> "$GITHUB_PATH"
+      - uses: actions/checkout@v4
+      - name: Test
+        run: |
+          go-acc . -- -race -v -tags "sqlite_allow_uri_authority sqlite_app_armor sqlite_column_metadata sqlite_foreign_keys sqlite_fts5 sqlite_introspect sqlite_json sqlite_math_functions sqlite_os_trace sqlite_preupdate_hook sqlite_secure_delete sqlite_see sqlite_stat4 sqlite_trace sqlite_unlock_notify sqlite_vacuum_incr sqlite_vtable"
+      - name: Upload coverage to Codecov
+        uses: codecov/codecov-action@v4
+        with:
+          env_vars: OS,GO
+          file: coverage.txt
 
   test-windows:
     name: Test for Windows
