@@ -1,4 +1,4 @@
-module github.com/labulakalia/go-sqlcipher
+module github.com/mutecomm/go-sqlcipher
 
 go 1.20
 
